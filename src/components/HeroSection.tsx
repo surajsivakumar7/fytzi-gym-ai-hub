@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-import heroImage from "@/assets/hero-image.jpg";
+import heroImage from "@/assets/hero-image-blue.jpg";
 
 const HeroSection = () => {
   return (
@@ -58,8 +58,8 @@ const HeroSection = () => {
             <div className="relative">
               <img
                 src={heroImage}
-                alt="Fytzi Gym Management Dashboard"
-                className="w-full h-auto rounded-2xl shadow-elegant"
+                alt="Modern Blue Architecture - Fytzi Gym Management"
+                className="w-full h-auto rounded-2xl shadow-elegant object-cover"
               />
               
               {/* Floating Cards */}
