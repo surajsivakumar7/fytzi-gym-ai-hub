@@ -1,14 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X, Dumbbell } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "Features", href: "#features" },
-    { label: "Benefits", href: "#benefits" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Features", href: "/#features" },
+    { label: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -17,23 +19,32 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <Dumbbell className="h-5 w-5 text-white" />
             </div>
             <span className="text-xl font-bold text-foreground">Fytzi</span>
-          </div>
+          </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
-              >
-                {item.label}
-              </a>
+              item.href.startsWith('#') || item.href.startsWith('/#') ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
           </nav>
 
@@ -61,14 +72,25 @@ const Header = () => {
           <div className="md:hidden py-4 border-t border-border/50">
             <nav className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
+                item.href.startsWith('#') || item.href.startsWith('/#') ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
               
               <div className="flex flex-col gap-3 pt-4">
